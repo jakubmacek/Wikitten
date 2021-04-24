@@ -2,6 +2,9 @@
 
 define('APP_STARTED', true);
 
+require_once __DIR__ . '/loginforediting.php';
+require_once __DIR__ . '/mediawikiimporter.php';
+
 // Conditionally load configuration from a config.php file in
 // the site root, if it exists.
 if (is_file($config_file = __DIR__ . DIRECTORY_SEPARATOR . 'config.php')) {

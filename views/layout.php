@@ -54,6 +54,7 @@ function e($dirty)
         <script src="static/js/jquery.min.js"></script>
         <script src="static/js/prettify.js"></script>
         <script src="static/js/codemirror.min.js"></script>
+		<script src="static/js/tinymce/tinymce.min.js"></script>
     </head>
 <body>
     <div id="main">
@@ -69,7 +70,7 @@ function e($dirty)
                     <div class="col-xs-12 col-md-3">
                         <div id="sidebar">
                             <div class="inner">
-                                <h2><span><?php echo e(APP_NAME) ?></span></h2>
+                                <h2><span><?php echo e(APP_NAME) ?></span> <span><a href="?enable_editing=yes">enable editing</a></span></h2>
                                 <?php include('tree.php') ?>
                             </div>
                         </div>

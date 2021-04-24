@@ -31,8 +31,12 @@ class Login
      */
     private function isLogged()
     {
-        if ($_SESSION['ACCESS_USER'] !== ACCESS_USER || $_SESSION['ACCESS_PASSWORD'] !== ACCESS_PASSWORD) {
-            return false;
+        if ($_SESSION['ACCESS_USER'] === ACCESS_USER || $_SESSION['ACCESS_PASSWORD'] === ACCESS_PASSWORD) {
+            return true;
+        }
+		
+		if ($_SESSION['ACCESS_USER'] === ACCESS_USER || password_verify($_SESSION['ACCESS_PASSWORD'], ACCESS_PASSWORD)) {
+            return true;
         }
 
         return true;

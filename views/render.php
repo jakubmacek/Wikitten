@@ -83,88 +83,128 @@
     </div>
 
     <script>
-        <?php if ($html): ?>
-            CodeMirror.defineInitHook(function () {
-                $('#source').hide();
-            });
-        <?php endif ?>
+		<?php if ($extension === 'html' || $extension === '') { ?>
+			$('#source').hide();
+		
+			$('#toggle').click(function (event) {
+				var tinymceInitialized = false;
+				
+				event.preventDefault();
+				$('#render').toggle();
+				$('#source').toggle();
+				
+				if ($('#source').is(':visible')) {
+					if (!tinymceInitialized) {
+						tinymceInitialized = true;
+						tinymce.init({
+							selector: '#editor',
+							forced_root_block: false,
+							plugins : 'textcolor colorpicker fullscreen hr lists table code',
+							// fontselect fontsizeselect
+							toolbar: 'undo redo fullscreen code | styleselect removeformat | bold italic underline strikethrough forecolor backcolor | hr numlist bullist | table tabledeleterow',
+							table_default_attributes: {},
+							table_default_styles: {},
+							invalid_styles: { 
+								'table' : 'width height',
+								'tr' : 'width height',
+								'th' : 'width height',
+								'td' : 'width height'
+							},
+							menubar: false,
+							setup: function (editor) {
+								editor.on('change', function () {
+									tinymce.triggerSave();
+									$('#render').html($('#editor').val());
+								});
+							}
+						});
+					}
+				}
+			});
+		<?php } else { ?>
+			<?php if ($html): ?>
+				CodeMirror.defineInitHook(function () {
+					$('#source').hide();
+				});
+			<?php endif ?>
 
-        var mode = false;
-        var modes = {
-            'md': 'markdown',
-            'markdown': 'markdown',
-            'mdown': 'markdown',
-            'js': 'javascript',
-            'php': 'php',
-            'sql': 'text/x-sql',
-            'py': 'python',
-            'scm': 'scheme',
-            'clj': 'clojure',
-            'rb': 'ruby',
-            'css': 'css',
-            'hs': 'haskell',
-            'lsh': 'haskell',
-            'pl': 'perl',
-            'r': 'r',
-            'scss': 'sass',
-            'sh': 'shell',
-            'xml': 'xml',
-            'html': 'htmlmixed',
-            'htm': 'htmlmixed'
-        };
-        var extension = '<?php echo $extension ?>';
-        if (typeof modes[extension] != 'undefined') {
-            mode = modes[extension];
-        }
+			var mode = false;
+			var modes = {
+				'md': 'markdown',
+				'markdown': 'markdown',
+				'mdown': 'markdown',
+				'js': 'javascript',
+				'php': 'php',
+				'sql': 'text/x-sql',
+				'py': 'python',
+				'scm': 'scheme',
+				'clj': 'clojure',
+				'rb': 'ruby',
+				'css': 'css',
+				'hs': 'haskell',
+				'lsh': 'haskell',
+				'pl': 'perl',
+				'r': 'r',
+				'scss': 'sass',
+				'sh': 'shell',
+				'xml': 'xml',
+				'html': 'htmlmixed',
+				'htm': 'htmlmixed'
+			};
+			var extension = '<?php echo $extension ?>';
+			if (typeof modes[extension] != 'undefined') {
+				mode = modes[extension];
+			}
 
-        var editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
-            lineNumbers: true,
-            lineWrapping: true,
-            <?php if (USE_DARK_THEME): ?>
-            theme: 'tomorrow-night-bright',
-            <?php else: ?>
-            theme: 'default',
-            <?php endif; ?>
-            mode: mode
-            <?php if (!ENABLE_EDITING): ?>
-            ,readOnly: true
-            <?php endif ?>
-        });
+			var editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+				lineNumbers: true,
+				lineWrapping: true,
+				<?php if (USE_DARK_THEME): ?>
+				theme: 'tomorrow-night-bright',
+				<?php else: ?>
+				theme: 'default',
+				<?php endif; ?>
+				mode: mode
+				<?php if (!ENABLE_EDITING): ?>
+				,readOnly: true
+				<?php endif ?>
+			});
 
-        $('#toggle').click(function (event) {
-            event.preventDefault();
-            $('#render').toggle();
-            $('#source').toggle();
-            if ($('#source').is(':visible')) {
-                editor.refresh();
-            }
+			$('#toggle').click(function (event) {
+				event.preventDefault();
+				$('#render').toggle();
+				$('#source').toggle();
+				if ($('#source').is(':visible')) {
+					editor.refresh();
+				}
 
-        });
+			});
 
-        <?php if ($use_pastebin): ?>
-        $('#create-pastebin').on('click', function (event) {
-            event.preventDefault();
+			<?php if ($use_pastebin): ?>
+			$('#create-pastebin').on('click', function (event) {
+				event.preventDefault();
 
-            $(this).addClass('disabled');
+				$(this).addClass('disabled');
 
-            var notification = $('#pastebin-notification');
-            notification.removeClass('alert-info alert-error').html('').hide();
+				var notification = $('#pastebin-notification');
+				notification.removeClass('alert-info alert-error').html('').hide();
 
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo BASE_URL . '/?a=createPasteBin'; ?>',
-                data: { ref: '<?php echo base64_encode($page['file']); ?>' },
-                context: $(this)
-            }).done(function(response) {
-                $(this).removeClass('disabled');
+				$.ajax({
+					type: 'POST',
+					url: '<?php echo BASE_URL . '/?a=createPasteBin'; ?>',
+					data: { ref: '<?php echo base64_encode($page['file']); ?>' },
+					context: $(this)
+				}).done(function(response) {
+					$(this).removeClass('disabled');
 
-                if (response.status === 'ok') {
-                    notification.addClass('alert-info').html('Paste URL: ' + response.url).show();
-                } else {
-                    notification.addClass('alert-error').html('Error: ' + response.error).show();
-                }
-            });
-        });
-        <?php endif; ?>
+					if (response.status === 'ok') {
+						notification.addClass('alert-info').html('Paste URL: ' + response.url).show();
+					} else {
+						notification.addClass('alert-error').html('Error: ' + response.error).show();
+					}
+				});
+			});
+			<?php endif; ?>
+		<?php } ?>
     </script>
 <?php endif ?>

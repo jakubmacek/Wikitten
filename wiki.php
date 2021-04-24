@@ -10,7 +10,8 @@ class Wiki
         'markdown' => 'Markdown',
         'mdown' => 'Markdown',
         'htm' => 'HTML',
-        'html' => 'HTML'
+        'html' => 'HTML',
+        '' => 'HTML'
     );
     protected $_ignore = "/^\..*|^CVS$/"; // Match dotfiles and CVS
     protected $_force_unignore = false; // always show these files (false to disable)
@@ -48,6 +49,7 @@ class Wiki
         $parts = explode('/', $page);
 
         $not_found = function () use ($page) {
+			MediaWikiImporter::importPage($page);
             $page = htmlspecialchars($page, ENT_QUOTES);
             throw new Exception("Page '$page' was not found");
         };
@@ -104,10 +106,12 @@ class Wiki
         }
 
         if (ENABLE_EDITING) {
-            $extension = substr($fullPath, strrpos($fullPath, '.') + 1, 20);
+			$extension = pathinfo($fullPath, PATHINFO_EXTENSION);
+            //$extension = substr($fullPath, strrpos($fullPath, '.') + 1, 20);
             if (false === $extension || false === $this->_getRenderer($extension)) {
                 $not_found();
             } elseif (!file_exists($fullPath)) {
+				MediaWikiImporter::importPage($page);
                 // Pass this to the render view, cleverly disguised as just
                 // another page, so we can make use of the tree, breadcrumb,
                 // etc.
@@ -129,13 +133,14 @@ class Wiki
                     'is_dir'    => false
                 ));
             }
-        } else {
+        } elseif (!file_exists($fullPath)) {
             $not_found();
         }
 
         $finfo = finfo_open(FILEINFO_MIME);
         $mime_type = trim(finfo_file($finfo, $path));
         if (substr($mime_type, 0, strlen('text/plain')) != 'text/plain'
+            && substr($mime_type, 0, strlen('text/html')) != 'text/html'
             && substr($mime_type, 0, strlen('inode/x-empty')) != 'inode/x-empty'
         ) {
             // not an ASCII file, send it directly to the browser
