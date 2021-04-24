@@ -1,3 +1,228 @@
-/*
- *	Place your custom CSS styles here, they will override all existing styles
- */
+.portable-infobox {
+	float: right;
+}
+
+.portable-infobox > div,
+.portable-infobox .pi-title {
+ background-color:#044D22;
+ background-image:url(https://images.wikia.nocookie.net/fallout/images/d/d1/WidgetBackground.jpg);
+ color:#FFFFFF
+}
+.portable-infobox,
+.portable-infobox .pi-group .pi-data {
+ background-color:#FFFFFF
+}
+.portable-infobox .pi-group .pi-data .pi-data-label,
+.pi-smart-group .pi-smart-data-label,
+.portable-infobox .pi-secondary-background,
+.portable-infobox .pi-group .pi-header {
+ background-color:#C9CDAC
+}
+.portable-infobox .pi-group .pi-data .pi-data-value,
+.portable-infobox .pi-horizontal-group-item,
+.pi-image,
+.pi-smart-data-value {
+ background:#E7EADA
+}
+.portable-infobox,
+.portable-infobox .pi-group .pi-header,
+.portable-infobox .pi-group .pi-data .pi-data-label,
+.portable-infobox .pi-group .pi-data .pi-data-value,
+.portable-infobox .pi-horizontal-group-item,
+.pi-smart-group .pi-smart-data-label,
+.pi-smart-data-value {
+ border:1px solid #AAA
+}
+.portable-infobox,
+.portable-infobox .pi-group .pi-data .pi-data-label,
+.portable-infobox .pi-group .pi-data .pi-data-value,
+.portable-infobox .pi-horizontal-group-item,
+.pi-smart-group .pi-smart-data-label,
+.pi-smart-data-value {
+ font-size:11px
+}
+.portable-infobox > div,
+.portable-infobox > div div {
+ font-size:10px
+}
+.portable-infobox,
+.portable-infobox > div,
+.portable-infobox > div div,
+.portable-infobox .pi-group .pi-data .pi-data-label,
+.portable-infobox .pi-group .pi-data .pi-data-value,
+.portable-infobox .pi-horizontal-group-item,
+.pi-smart-data-value {
+ line-height:14px
+}
+.portable-infobox > div {
+ border:none !important;
+ font-size:13px;
+ font-style:italic;
+ margin-top:-3px;
+ margin-bottom:0px
+}
+.portable-infobox > div div {
+ color:#FFFFFF;
+ font-style:italic;
+ margin-left:auto;
+ margin-right:auto
+}
+.portable-infobox > div div a {
+ color:#AFA000 !important
+}
+.portable-infobox {
+ width:246px!important;
+ -moz-box-shadow:2px 2px 2px #AAA;
+ -webkit-box-shadow:2px 2px 2px #AAA;
+ -o-box-shadow:2px 2px 2px #AAA;
+ -ms-box-shadow:2px 2px 2px #AAA;
+ box-shadow:2px 2px 2px #AAA;
+ padding:1px
+}
+.portable-infobox .pi-title {
+ font-size:18px;
+ font-weight:900 !important;
+ padding-bottom:5px !important;
+ padding-top:5px !important;
+ text-align:center
+}
+.portable-infobox .pi-group {
+ border:none !important
+}
+.portable-infobox .pi-header {
+ padding:0;
+ margin:0;
+ font-weight:bold;
+ text-align:center;
+ color:#000
+}
+.portable-infobox .pi-group .pi-header {
+ font-weight:bold;
+ margin-bottom:1px;
+ text-align:center
+}
+.portable-infobox .pi-group .pi-data {
+ border-bottom:none;
+ margin-left:-1px;
+ padding:0px;
+ padding-top:0px;
+ width:100.8%
+}
+.portable-infobox .pi-group .pi-data .pi-data-label {
+ margin:0px 0.0px 1px 1px !important;
+ padding-right:0px;
+ text-align:right
+}
+.portable-infobox .pi-group .pi-data .pi-data-label h3 {
+ overflow:hidden !important
+}
+.portable-infobox .pi-group .pi-data .pi-data-value {
+ width:100%;
+ padding-left:2px !important;
+ margin:0px 0.5px 1px 1px !important
+}
+.portable-infobox section:last-of-type {
+ margin-bottom:-1px !important
+}
+.portable-infobox .pi-title a,
+.portable-infobox .pi-title a:link,
+.portable-infobox .pi-title a:visited {
+ color:#AFA000!important 
+}
+.pi-border-color {
+ border-color:transparent
+}
+.pi-data .pi-data-label {
+ font-weight:normal;
+ text-align:right;
+ -ms-flex-preferred-size:auto;
+ -webkit-flex-basis:auto;
+ -moz-flex-basis:auto;
+ line-height:140%;
+ color:#2a3439;
+ width:40%;
+ padding-right:2px!important
+}
+.pi-data .pi-data-value {
+ text-align:left;
+ -ms-flex-preferred-size:auto;
+ -webkit-flex-basis:auto;
+ -moz-flex-basis:auto;
+ flex-basis:auto;
+ line-height:140%;
+ width:auto
+}
+.pi-data-value:first-child {
+ text-align:center 
+}
+.pi-image {
+ border:1px solid grey;
+ margin:0;
+ padding:1px;
+ line-height:130%
+}
+img.pi-image-thumbnail {
+ max-width:100%!important;
+ height:auto
+}
+.portable-infobox .pi-image figcaption {
+ border:none!important;
+ border-left:1px solid #AAAAAA;
+ border-right:1px solid #AAAAAA;
+ color:#000;
+ text-align:center
+}
+.portable-infobox .pi-image {
+ border-bottom:1px solid #AAAAAA;
+ margin-bottom:1px
+}
+div.pi-data-value.pi-font img {
+ display:inline!important
+}
+.pi-horizontal-group .pi-horizontal-group-item {
+ vertical-align:middle
+}
+.pi-horizontal-group .pi-data-label {
+ background-color:#C9D0AC;
+ width:50%
+}
+.pi-smart-group .pi-smart-data-label {
+ font-weight:bold;
+ margin-bottom:1px;
+ text-align:center
+}
+.portable-infobox section:last-of-type .pi-smart-group-body {
+ margin-bottom:1px!important
+}
+.portable-infobox.pi-theme-event {
+ max-width:300px;
+ min-width:300px;
+ width:100% 
+}
+.portable-infobox.pi-theme-event img.pi-image-thumbnail {
+ max-width:100%;
+ min-width:100%;
+ height:auto 
+}
+.portable-infobox.pi-theme-gamebryoammo .pi-horizontal-group {
+ table-layout:inherit!important 
+}
+.pi-theme-armor-fobos .pi-horizontal-group .pi-data-label:first-child {
+ width:148%!important
+}
+.pi-theme-armor-fobos .pi-horizontal-group .pi-data-value:first-child {
+ width:60%!important;
+ background-color:#c9d0ac!important 
+}
+.portable-infobox .pi-group .pi-group .pi-data .pi-data-label {
+ background-color:#e0e4c1
+}
+.portable-infobox .pi-group .pi-group {
+ width:96%;
+ margin:auto;
+ padding:0
+}
+.portable-infobox .pi-group .pi-group .pi-header {
+ font-size:1em;
+ background-color:#e0e4c1
+}

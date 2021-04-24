@@ -2,6 +2,7 @@
 
 define('APP_STARTED', true);
 
+require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/loginforediting.php';
 require_once __DIR__ . '/mediawikiimporter.php';
 
