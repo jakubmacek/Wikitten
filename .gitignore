@@ -20,3 +20,4 @@ Session.vim
 *.ori
 *.backup
 .DS_Store
+/.idea
