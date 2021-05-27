@@ -9,6 +9,7 @@
         <?php if ($use_pastebin): ?>
             <a href="javascript:;" class="btn-black" id="create-pastebin" title="Create public Paste on PasteBin">Create public Paste</a>
         <?php endif; ?>
+		<a href="https://<?= ltrim($_SERVER['REQUEST_URI'], '/') ?>" class="btn-black" style="color: #4FA1FF;">Original page</a>
     </div>
 
     <?php $path = array(); ?>
@@ -67,18 +68,24 @@
         <?php if (ENABLE_EDITING): ?>
             <div class="alert alert-info">
                 <i class="glyphicon glyphicon-pencil"></i> <strong>Editing is enabled</strong>. Use the "Save changes" button below the editor to commit modifications to this file.
+				<form method="POST" action="<?php echo BASE_URL . "/?a=edit" ?>" style="display: inline-block;">
+					<input type="submit" class="btn btn-danger btn-sm" value="Set content to 'Done.'">
+					<input type="hidden" name="ref" value="<?php echo base64_encode($page['file']) ?>">
+					<input type="hidden" name="source" value="Done.">
+				</form>
             </div>
         <?php endif ?>
 
+
         <form method="POST" action="<?php echo BASE_URL . "/?a=edit" ?>">
+			<?php if (ENABLE_EDITING): ?>
+				<div class="form-actions" style="margin: 0;">
+					<input type="submit" class="btn btn-success btn-sm" id="submit-edits" value="Save Changes">
+				</div>
+			<?php endif ?>
+			
             <input type="hidden" name="ref" value="<?php echo base64_encode($page['file']) ?>">
             <textarea id="editor" name="source" class="form-control" rows="<?php echo substr_count($source, "\n") + 1; ?>"><?php echo $source; ?></textarea>
-
-            <?php if (ENABLE_EDITING): ?>
-                <div class="form-actions">
-                    <input type="submit" class="btn btn-warning btn-sm" id="submit-edits" value="Save Changes">
-                </div>
-            <?php endif ?>
         </form>
     </div>
 
@@ -97,6 +104,7 @@
 					if (!tinymceInitialized) {
 						tinymceInitialized = true;
 						tinymce.init({
+							content_css: "/static/css/custom.css",
 							selector: '#editor',
 							forced_root_block: false,
 							plugins : 'textcolor colorpicker fullscreen hr lists table code',

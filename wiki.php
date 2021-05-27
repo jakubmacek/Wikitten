@@ -49,7 +49,7 @@ class Wiki
         $parts = explode('/', $page);
 
         $not_found = function () use ($page) {
-			MediaWikiImporter::importPage($page);
+            (new MediaWikiImporter())->importPage($page);
             $page = htmlspecialchars($page, ENT_QUOTES);
             throw new Exception("Page '$page' was not found");
         };
@@ -111,7 +111,7 @@ class Wiki
             if (false === $extension || false === $this->_getRenderer($extension)) {
                 $not_found();
             } elseif (!file_exists($fullPath)) {
-				MediaWikiImporter::importPage($page);
+                (new MediaWikiImporter())->importPage($page);
                 // Pass this to the render view, cleverly disguised as just
                 // another page, so we can make use of the tree, breadcrumb,
                 // etc.
@@ -166,6 +166,8 @@ class Wiki
 
         // We need to know the source file in case editing is enabled:
         $page_data['file'] = $page;
+		$pageTitle = explode('/', $page);
+        $page_data['title'] = strtr(array_pop($pageTitle), '_', ' ');
 
         $html = false;
         if ($renderer && $renderer == 'HTML') {

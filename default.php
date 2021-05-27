@@ -4,7 +4,7 @@ define('APP_STARTED', true);
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/loginforediting.php';
-require_once __DIR__ . '/mediawikiimporter.php';
+require_once __DIR__ . '/MediaWikiImporter.php';
 
 // Conditionally load configuration from a config.php file in
 // the site root, if it exists.
